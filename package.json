@@ -1,0 +1,24 @@
+{
+  "name": "poopscoop4two-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:bportheine/PoopScoop4Two-Back-End-.git",
+  "author": "nsch1 <nick.schooneman1@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "pg": "6",
+    "sequelize": "^4.35.2",
+    "sequelize-cli": "^4.0.0"
+  },
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon --inspect .",
+    "sequelize": "node_modules/.bin/sequelize"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.1"
+  }
+}
