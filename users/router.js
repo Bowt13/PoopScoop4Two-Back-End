@@ -14,4 +14,20 @@ router.get('/users', (req, res) => {
     })
 })
 
+router.patch('/users/:id', (req, res) => {
+  const updates = req.body
+
+  User.findById(req.params.id)
+    .then(user => {
+      if (!user) return res.status(404).json({ message: "No user with matching id found."})
+      return user.update(updates)
+    })
+    .then(updatedUsed => {
+      res.json(updatedUsed)
+    })
+    .catch(err => {
+      res.status(500).json({ message: err.message })
+    })
+})
+
 module.exports = router
