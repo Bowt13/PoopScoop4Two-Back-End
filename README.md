@@ -4,9 +4,11 @@
 
 2. Pull the master branch `git pull`
 
-3. When you start working checkout on a branch `git checkout -b branch-name`
+3. Then install dependencies `yarn install`
 
-4. When you push always push to the branch you're working on: `git push origin branch-name`
+4. When you start working checkout on a branch `git checkout -b branch-name`
+
+5. When you push always push to the branch you're working on: `git push origin branch-name`
 
 # Yarn commands
 
