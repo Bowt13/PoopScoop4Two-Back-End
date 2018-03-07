@@ -25,7 +25,7 @@ module.exports = {
   down: function (queryInterface, Sequelize) {
     return [
       queryInterface.removeColumn('Uers', 'email'),
-      queryInterface.removeColumn('Users', 'encryptedPassword')
+      queryInterface.removeColumn('Users', 'password')
     ];
   }
 };
