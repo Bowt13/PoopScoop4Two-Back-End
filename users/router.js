@@ -58,7 +58,8 @@ router.post('/logins', (req, res) => {
       if (bcrypt.compareSync(req.body.password, user.password)) {
         res.json({
           jwt: sign(user.id),
-          id: user.id
+          id: user.id,
+          breedStats: user.breedStats
         })
       }
       else {
