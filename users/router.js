@@ -47,6 +47,29 @@ router.patch('/users/:id', (req, res) => {
     })
 })
 
+router.post('/users', (req, res) => {
+  const user = {
+    email: req.body.email,
+    password: bcrypt.hashSync(req.body.password, 10),
+    name: req.body.name
+  }
+
+  User.create(user)
+  .then(entity => {
+    res.json({
+      id: entity.id,
+      email: entity.email,
+      name: entity.name
+    })
+  })
+  .catch(err => {
+    console.error(err)
+    res.status(500).json({
+      message: 'Something went wrong'
+    })
+  })
+})
+
 router.post('/logins', (req, res) => {
   User
     .findOne({
