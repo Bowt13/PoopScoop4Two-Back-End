@@ -20,7 +20,7 @@ router.get('/users', (req, res) => {
 
 router.get('/users/:id', (req, res) => {
   User.findById(req.params.id, {
-    attributes: ['id', 'name', 'breedStats']
+    attributes: ['id', 'name', 'email', 'breedStats']
   })
     .then(user => {
       if (!user) return res.status(404).json({ message: "No user with matching id found."})
