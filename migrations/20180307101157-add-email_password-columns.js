@@ -13,7 +13,7 @@ module.exports = {
       ),
       queryInterface.addColumn(
         'Users',
-        'encryptedPassword',
+        'password',
         {
           type: Sequelize.STRING,
           allowNull: false
