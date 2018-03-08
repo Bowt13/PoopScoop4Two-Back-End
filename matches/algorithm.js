@@ -1,4 +1,4 @@
-const users = [
+/*const users = [
   { 
     id: 1,
     breedStats: [
@@ -101,16 +101,20 @@ const newUsers = users.map(user => {
   user.totalVotes = totalVotes
   return user
 })
+*/
 
-const newerUsers = newUsers.map(user => {
-  user.breedStats.map(breed => {
-    breed.percentage = Math.round(breed.votes / user.totalVotes * 100)
+const addVotePercentage = (users) => {
+  return users.map(user => {
+    user.breedStats.map(breed => {
+      breed.percentage = Math.round(breed.votes / user.totalVotes * 100)
+    })
+    return user
   })
-  return user
-})
+}
 
 
-const currentUser = newerUsers[2]
+//const currentUser = newerUsers[2]
+
 
 const calcDifference = (a, b) => {
   return Math.abs(a - b)
@@ -126,6 +130,7 @@ const calcDeviation = (userBreedStats, deviation, breedObject) => {
     const userPercent = userBreedStats[i].percentage
 
     if (sameBreed(userBreed, breedObject.breed)) {
+      //console.log(calcDifference(userPercent, breedObject.percentage))
       return deviation + calcDifference(userPercent, breedObject.percentage)
     }
     return deviation + breedObject.percentage
@@ -148,7 +153,10 @@ const sortMatches = (matches) => {
 }
 
 const getMatches = (users, currentUser) => {
-  const matches = newerUsers.map(user => {
+  const newUsers = addVotePercentage(users)
+  const newCurrUser = addVotePercentage([currentUser])[0]
+  newCurrUser.breedStats = newCurrUser.breedStats.slice(0, 1)
+  const matches = newUsers.map(user => {
     if (isCurrentUser(user, currentUser)) return user
 
     user.matchRating = calcMatchRating(user, currentUser)
@@ -157,11 +165,4 @@ const getMatches = (users, currentUser) => {
   return sortMatches(matches)
 }
 
-const matches = getMatches(newerUsers, currentUser)
-
-console.log(newerUsers[0])
-console.log()
-console.log(newerUsers[1])
-
-console.log()
-console.log(matches)
+module.exports = {getMatches}

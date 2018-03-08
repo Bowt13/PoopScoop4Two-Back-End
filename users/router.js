@@ -2,6 +2,8 @@ const Router = require('express').Router
 const {User} = require('../models')
 const bcrypt = require('bcrypt')
 const {sign} = require('../jwt')
+const Op = require('sequelize').Op
+const {getMatches} = require('../matches/algorithm')
 
 const router = new Router()
 
@@ -16,6 +18,29 @@ router.get('/users', (req, res) => {
     .catch(err => {
       res.status(500).json({ message: "Something went wrong connecting to the database." })
     })
+})
+
+router.get('/matches/:id', (req, res) => {
+  User.findById(req.params.id, {
+    attributes: { exclude: ['password']}
+  })
+    .then(entity => {
+      User.findAll({
+        attributes: { exclude: ['password'] },
+        where: {
+          id: {
+            [Op.not]: req.params.id
+          }
+        }
+      })
+        .then(result => {
+          console.log()
+          const users = JSON.parse(JSON.stringify(result))
+          const currentUser = JSON.parse(JSON.stringify(entity))
+          res.json(getMatches(users, currentUser))
+        })
+    })
+
 })
 
 router.get('/users/:id', (req, res) => {
