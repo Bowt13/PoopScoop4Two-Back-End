@@ -37,8 +37,14 @@ router.get('/matches/:id', (req, res) => {
           console.log()
           const users = JSON.parse(JSON.stringify(result))
           const currentUser = JSON.parse(JSON.stringify(entity))
-          res.json(getMatches(users, currentUser))
+          res.json(getMatches(users, currentUser).slice(0, 10))
         })
+        .catch(err => {
+          res.status(500).json({ message: 'Something went wrong.' })
+        })
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Something went wrong.' })
     })
 
 })

@@ -49,10 +49,10 @@ const breeds = [
 
 const generateBreedStats = () => {
   const breedStats = []
-  for (var i = 0; i < 20; i++) {
+  for (var i = 0; i < 35; i++) {
     const randomBreed = breeds[Math.floor(Math.random()*breeds.length)]
 
-    const randomVotes = Math.floor(Math.random()*Math.floor(Math.random()*70)) - 20
+    const randomVotes = Math.floor(Math.random()*Math.floor(Math.random()*200)) - 20
 
     const amountOfdubplicates = breedStats.filter(function(breed) {
       return breed['breed'] == randomBreed
@@ -70,7 +70,7 @@ const generateBreedStats = () => {
 
 const fakeUsers = []
 
-for (var i = 0; i < 150; i++) {
+for (var i = 0; i < 450; i++) {
   fakeUsers.push(
     {
       name: fakerator.names.name(),
