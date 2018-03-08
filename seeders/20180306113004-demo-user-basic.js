@@ -44,12 +44,15 @@ const breeds = [
 ]
 
 const generateBreedStats = () => {
-  const breedStats = {}
+  const breedStats = []
   for (var i = 0; i < 20; i++) {
     const randomBreed = breeds[Math.floor(Math.random()*breeds.length)]
-    breedStats[randomBreed] = Math.floor(Math.random*70) - 20
+    const randomVotes = Math.floor(Math.random()*70) - 20
+    breedStats.push({ breed: randomBreed, votes: randomVotes })
   }
-  return breedStats
+  return breedStats.sort((a, b) => {
+    return b.votes - a.votes
+  })
 }
 
 const fakeUsers = []
@@ -60,7 +63,7 @@ for (var i = 0; i < 150; i++) {
       name: fakerator.names.name(),
       email: fakerator.internet.email(),
       password: bcrypt.hashSync('secret', 10),
-      breedStats: JSON.stringify(generateBreedStats())
+      breedStats: generateBreedStats()
     }
   )
 }
@@ -69,17 +72,17 @@ fakeUsers.unshift({
   name: 'Jack Russel',
   email: 'jack@example.com',
   password: bcrypt.hashSync('secret', 10),
-  breedStats: JSON.stringify(generateBreedStats())
+  breedStats: generateBreedStats()
 },
 {
   name: 'Peter Dogtown',
-  breedStats: JSON.stringify(generateBreedStats()),
+  breedStats: generateBreedStats(),
   email: 'peter@example.com',
   password: bcrypt.hashSync('secret', 10)
 },
 {
   name: 'Lola Pugari',
-  breedStats: JSON.stringify(generateBreedStats()),
+  breedStats: generateBreedStats(),
   email: 'lola@example.com',
   password: bcrypt.hashSync('secret', 10)
 })
@@ -93,30 +96,15 @@ const newFakeUsers = fakeUsers.map(user => {
   return user
 })
 
+const newestFakeUsers = newFakeUsers.map(user => {
+  user.breedStats = JSON.stringify(user.breedStats)
+  return user
+})
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    const seeds = [
-    {
-      name: 'Jack Russel',
-      breedStats: JSON.stringify({pug: 2, shiba: 5, shitzu: -3}),
-      email: 'jackrussel@example.com',
-      password: bcrypt.hashSync('secret', 10)
-    },
-    {
-      name: 'Peter Dogtown',
-      breedStats: JSON.stringify({pug: 1, shiba: -1, shitzu: 3}),
-      email: 'peter@example.com',
-      password: bcrypt.hashSync('secret', 10)
-    },
-    {
-      name: 'Lola Pugari',
-      breedStats: JSON.stringify({vizsla: -1, pug: 3, saluki: -3}),
-      email: 'lola@example.com',
-      password: bcrypt.hashSync('secret', 10)
-    }
-    ]
 
-    return queryInterface.bulkInsert('Users', seeds, {})
+    return queryInterface.bulkInsert('Users', newestFakeUsers, {})
   },
 
   down: (queryInterface, Sequelize) => {
