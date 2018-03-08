@@ -4,7 +4,6 @@ const fakerator = Fakerator()
 
 const bcrypt = require('bcrypt')
 
-
 const breeds = [
   "husky",
   "keeshond",
@@ -40,15 +39,29 @@ const breeds = [
   "maltese",
   "lhasa",
   "malinois",
-  "leonberg"
+  "leonberg",
+  "groenendael",
+  "kelpie",
+  "komondor",
+  "newfoundland",
+  "pembroke"
 ]
 
 const generateBreedStats = () => {
   const breedStats = []
-  for (var i = 0; i < 20; i++) {
+  for (var i = 0; i < 35; i++) {
     const randomBreed = breeds[Math.floor(Math.random()*breeds.length)]
-    const randomVotes = Math.floor(Math.random()*70) - 20
-    breedStats.push({ breed: randomBreed, votes: randomVotes })
+
+    const randomVotes = Math.floor(Math.random()*Math.floor(Math.random()*200)) - 20
+
+    const amountOfdubplicates = breedStats.filter(function(breed) {
+      return breed['breed'] == randomBreed
+    })
+    if (amountOfdubplicates.length == 0 ) {
+      breedStats.push({ breed: randomBreed, votes: randomVotes })
+    } else {
+      i = i-1
+    }
   }
   return breedStats.sort((a, b) => {
     return b.votes - a.votes
@@ -57,7 +70,7 @@ const generateBreedStats = () => {
 
 const fakeUsers = []
 
-for (var i = 0; i < 150; i++) {
+for (var i = 0; i < 450; i++) {
   fakeUsers.push(
     {
       name: fakerator.names.name(),
