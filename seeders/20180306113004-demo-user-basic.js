@@ -48,7 +48,15 @@ const generateBreedStats = () => {
   for (var i = 0; i < 20; i++) {
     const randomBreed = breeds[Math.floor(Math.random()*breeds.length)]
     const randomVotes = Math.floor(Math.random()*70) - 20
-    breedStats.push({ breed: randomBreed, votes: randomVotes })
+    const amountOfdubplicates = breedStats.filter(function(breed) {
+      return breed['breed'] == randomBreed
+    })
+    if (amountOfdubplicates.length == 0 ) {
+      console.log(amountOfdubplicates)
+      breedStats.push({ breed: randomBreed, votes: randomVotes })
+  } else {
+    i = i-1
+  }
   }
   return breedStats.sort((a, b) => {
     return b.votes - a.votes
