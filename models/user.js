@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     breedStats: DataTypes.JSON,
     email:DataTypes.STRING,
-    password:DataTypes.STRING
+    password:DataTypes.STRING,
+    totalVotes:DataTypes.INTEGER
   }, {
     timestamps: false
   });

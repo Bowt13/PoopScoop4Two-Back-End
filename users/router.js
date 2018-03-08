@@ -7,7 +7,7 @@ const router = new Router()
 
 router.get('/users', (req, res) => {
   User.findAll({
-    attributes: ['id', 'name', 'breedStats']
+    attributes: ['id', 'name', 'breedStats', 'totalVotes']
   })
     .then(result => {
       if (!result) return res.status(404).json({ message: "Sorry no users found." })
