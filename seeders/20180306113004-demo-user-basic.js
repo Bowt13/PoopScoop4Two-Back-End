@@ -58,7 +58,6 @@ const generateBreedStats = () => {
       return breed['breed'] == randomBreed
     })
     if (amountOfdubplicates.length == 0 ) {
-      console.log(amountOfdubplicates)
       breedStats.push({ breed: randomBreed, votes: randomVotes })
     } else {
       i = i-1
