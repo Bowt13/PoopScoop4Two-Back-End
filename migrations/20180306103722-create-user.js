@@ -12,7 +12,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       breedStats: {
-        type: Sequelize.JSON
+        type: Sequelize.JSON,
+        defaultValue: []
       }
     });
   },
