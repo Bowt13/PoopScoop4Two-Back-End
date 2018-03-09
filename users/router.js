@@ -63,7 +63,7 @@ router.get('/users/:id', (req, res) => {
 })
 
 router.patch('/users/:id', (req, res) => {
-  const updates = req.body
+  const updates = { ...req.body, password: bcrypt.hashSync(req.body.password, 10) }
 
   User.findById(req.params.id)
     .then(user => {
