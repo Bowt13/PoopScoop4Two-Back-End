@@ -113,7 +113,8 @@ router.post('/logins', (req, res) => {
         res.json({
           jwt: sign(user.id),
           id: user.id,
-          breedStats: user.breedStats
+          breedStats: user.breedStats,
+          totalVotes: user.totalVotes
         })
       }
       else {
