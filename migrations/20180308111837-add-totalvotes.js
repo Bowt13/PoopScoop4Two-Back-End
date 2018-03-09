@@ -8,7 +8,7 @@ module.exports = {
         'totalVotes',
         {
           type: Sequelize.INTEGER,
-          allowNull: false
+          defaultValue: 0
         }
       ),
     ];

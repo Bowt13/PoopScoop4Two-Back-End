@@ -45,10 +45,10 @@ const sortMatches = (matches) => {
 const getMatches = (users, currentUser) => {
   const newUsers = addVotePercentage(users)
   const newCurrUser = addVotePercentage([currentUser])[0]
-  newCurrUser.breedStats = newCurrUser.breedStats.slice(0, 3)
-  const matches = newUsers.map(user => {
-    if (isCurrentUser(user, currentUser)) return user
 
+  newCurrUser.breedStats = newCurrUser.breedStats.slice(0, 3)
+
+  const matches = newUsers.map(user => {
     user.matchRating = calcMatchRating(user, currentUser)
     return user
   })
